@@ -1,0 +1,6 @@
+*.class
+lib/
+out/
+setup.sh
+commits.sh
+.env
