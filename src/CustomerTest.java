@@ -44,4 +44,17 @@ public class CustomerTest {
         assertTrue(result.contains("Interstellar"));
         assertTrue(result.contains("6.0"));
     }
+
+    @Test
+    public void testMultipleRentalsStatement() {
+        Customer customer = new Customer("Emma");
+        customer.addRental(new Rental(new Movie("Titanic", Movie.REGULAR), 3));
+        customer.addRental(new Rental(new Movie("Toy Story", Movie.CHILDRENS), 4));
+        customer.addRental(new Rental(new Movie("Interstellar", Movie.NEW_RELEASE), 2));
+
+        String result = customer.statement();
+
+        assertTrue(result.contains("12.5"));
+        assertTrue(result.contains("4 frequent renter points"));
+    }
 }
