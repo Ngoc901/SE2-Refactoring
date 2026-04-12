@@ -25,7 +25,7 @@ class Customer {
             double thisAmount = 0;
             Rental rental = (Rental) enum_rentals.nextElement();
 
-            thisAmount = amountFor(rental);
+            thisAmount = rental.getCharge();
 
             frequentRenterPoints++;
             if ((rental.getMovie().getPriceCode() == Movie.NEW_RELEASE) && rental.getDaysRented() > 1)
@@ -37,25 +37,5 @@ class Customer {
         result += "Amount owed is " + String.valueOf(totalAmount) + "\n";
         result += "You earned " + String.valueOf(frequentRenterPoints) + " frequent renter points";
         return result;
-    }
-
-    private double amountFor(Rental rental) {
-        double charge = 0;
-        switch (rental.getMovie().getPriceCode()) {
-            case Movie.REGULAR:
-                charge += 2;
-                if (rental.getDaysRented() > 2)
-                    charge += (rental.getDaysRented() - 2) * 1.5;
-                break;
-            case Movie.NEW_RELEASE:
-                charge += rental.getDaysRented() * 3;
-                break;
-            case Movie.CHILDRENS:
-                charge += 1.5;
-                if (rental.getDaysRented() > 3)
-                    charge += (rental.getDaysRented() - 3) * 1.5;
-                break;
-        }
-        return charge;
     }
 }
