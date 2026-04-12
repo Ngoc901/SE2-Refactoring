@@ -23,15 +23,15 @@ class Customer {
 
         while (enum_rentals.hasMoreElements()) {
             double thisAmount = 0;
-            Rental each = (Rental) enum_rentals.nextElement();
+            Rental rental = (Rental) enum_rentals.nextElement();
 
-            thisAmount = amountFor(each);
+            thisAmount = amountFor(rental);
 
             frequentRenterPoints++;
-            if ((each.getMovie().getPriceCode() == Movie.NEW_RELEASE) && each.getDaysRented() > 1)
+            if ((rental.getMovie().getPriceCode() == Movie.NEW_RELEASE) && rental.getDaysRented() > 1)
                 frequentRenterPoints++;
 
-            result += "\t" + each.getMovie().getTitle() + "\t" + "\t" + each.getDaysRented() + "\t" + String.valueOf(thisAmount) + "\n";
+            result += "\t" + rental.getMovie().getTitle() + "\t" + "\t" + rental.getDaysRented() + "\t" + String.valueOf(thisAmount) + "\n";
             totalAmount += thisAmount;
         }
         result += "Amount owed is " + String.valueOf(totalAmount) + "\n";
@@ -39,23 +39,23 @@ class Customer {
         return result;
     }
 
-    private double amountFor(Rental each) {
-        double thisAmount = 0;
-        switch (each.getMovie().getPriceCode()) {
+    private double amountFor(Rental rental) {
+        double charge = 0;
+        switch (rental.getMovie().getPriceCode()) {
             case Movie.REGULAR:
-                thisAmount += 2;
-                if (each.getDaysRented() > 2)
-                    thisAmount += (each.getDaysRented() - 2) * 1.5;
+                charge += 2;
+                if (rental.getDaysRented() > 2)
+                    charge += (rental.getDaysRented() - 2) * 1.5;
                 break;
             case Movie.NEW_RELEASE:
-                thisAmount += each.getDaysRented() * 3;
+                charge += rental.getDaysRented() * 3;
                 break;
             case Movie.CHILDRENS:
-                thisAmount += 1.5;
-                if (each.getDaysRented() > 3)
-                    thisAmount += (each.getDaysRented() - 3) * 1.5;
+                charge += 1.5;
+                if (rental.getDaysRented() > 3)
+                    charge += (rental.getDaysRented() - 3) * 1.5;
                 break;
         }
-        return thisAmount;
+        return charge;
     }
 }
