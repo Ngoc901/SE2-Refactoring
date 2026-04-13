@@ -33,4 +33,24 @@ class Customer {
         result += "You earned " + String.valueOf(frequentRenterPoints) + " frequent renter points";
         return result;
     }
+
+    private double getTotalCharge() {
+        double total = 0;
+        Enumeration enum_rentals = rentals.elements();
+        while (enum_rentals.hasMoreElements()) {
+            Rental rental = (Rental) enum_rentals.nextElement();
+            total += rental.getCharge();
+        }
+        return total;
+    }
+
+    private int getTotalFrequentRenterPoints() {
+        int total = 0;
+        Enumeration enum_rentals = rentals.elements();
+        while (enum_rentals.hasMoreElements()) {
+            Rental rental = (Rental) enum_rentals.nextElement();
+            total += rental.getFrequentRenterPoints();
+        }
+        return total;
+    }
 }
