@@ -36,4 +36,9 @@ public class Movie {
         }
         return charge;
     }
+    int getFrequentRenterPoints(int daysRented) {
+        if (priceCode == NEW_RELEASE && daysRented > 1)
+            return 2;
+        return 1;
+    }
 }
